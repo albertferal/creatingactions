@@ -12,3 +12,6 @@ jobs:
         with:
           node-version: 16
       - uses: ./ # con esto le decimos a github que busque el archivo action.yml y la ejecute
+      - uses: ./
+        with:
+          person: "Batman"

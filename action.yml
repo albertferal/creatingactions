@@ -1,5 +1,10 @@
 name: albertferal-action-personalizada #debe ser única y que no exista previamente
 description: Esta action saluda a diversas personas
+inputs:
+  person:
+    description: "Persona a la que saludar"
+    required: True 
+    default: ", no se quien eres pero me gustaría ver a Batman..." #en caso de no haber un input, saludará de este modo
 runs:
   using: node16
   main: src/index.js #archivo donde irá toda la lógica de nuestra action
