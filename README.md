@@ -77,5 +77,49 @@ git push
 
 ## Mejorando la Action:
 
-- Ahora modificaremos la action para añadirle un imput, de ese modo será un poco más versátil que un "Hola mundo!". Para ello hay que configurar de nuevo el script [action.yml](action.yml):
+- Ahora modificaremos la action para añadirle un imput, de ese modo será un poco más versátil que un "Hola mundo!". Para ello hay que configurar de nuevo el script [action.yml](action.yml) y añadirle inputs, en este caso un input llamado "person", que tendrá las características "description", "required" y "default".
 
+```
+name: albertferal-action-personalizada #debe ser única y que no exista previamente
+description: Esta action saluda a diversas personas
+inputs:
+  person:
+    description: "Persona a la que saludar"
+    required: True 
+    default: ", no se quien eres pero me gustaría ver a Batman..." #en caso de no haber un input, saludará de este modo
+runs:
+  using: node16
+  main: src/index.js #archivo donde irá toda la lógica de nuestra action
+```
+
+- También modificamos el archivo [index.js](src\index.js), quedando tal que así:
+
+    <img src="images/action-4.png" alt="Action-4" width="600"/>
+
+- En el pipeline también tenemos una pequeña modificación, hemos añadido otro "uses: ./" . Uno para no utilice el input y se genere con el de por defecto, y otro para que utilice el input generado "Batman"
+
+```
+name: Test
+
+on: 
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: ./ # con esto le decimos a github que busque el archivo action.yml y la ejecute // sin input
+      - uses: ./ #con input
+        with:
+          person: "Batman"
+```
+
+
+
+- Hacemos un add, commit y push para verificar nuestra actions en el pipeline de Actions:
+
+![Action batman executed and completed](images\Action-5.png)
