@@ -1,0 +1,5 @@
+name: albertferal-action-personalizada #debe ser única y que no exista previamente
+description: Esta action saluda a diversas personas
+runs:
+  using: node16
+  main: src/index.js #archivo donde irá toda la lógica de nuestra action
