@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - uses: ./ # con esto le decimos a github que busque el archivo action.yml y la ejecute
-      - uses: ./
+      - uses: ./ # con esto le decimos a github que busque el archivo action.yml y la ejecute // sin input
+      - uses: ./ #con input
         with:
           person: "Batman"
